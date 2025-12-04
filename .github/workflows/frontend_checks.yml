@@ -15,7 +15,7 @@ env:
 
 jobs:
   Clients-Unit:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     strategy:
       matrix:
         node-version: [20.x]

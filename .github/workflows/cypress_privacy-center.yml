@@ -16,7 +16,7 @@ env:
 
 jobs:
   Privacy-Center-Cypress:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     defaults:
       run:
         working-directory: clients

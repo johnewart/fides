@@ -31,7 +31,7 @@ jobs:
             "check_install",
             '"pytest(nox)"',
           ]
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     continue-on-error: true
     steps:
       - name: Checkout

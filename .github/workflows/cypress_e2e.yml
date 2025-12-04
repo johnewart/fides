@@ -16,7 +16,7 @@ env:
 
 jobs:
   Cypress-E2E:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     strategy:
       matrix:
         node-version: [20.x]

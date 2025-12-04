@@ -15,7 +15,7 @@ env:
 
 jobs:
   prepare-matrix:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     outputs:
       spec_groups: ${{ steps.set-matrix.outputs.spec_groups }}
     steps:
@@ -76,7 +76,7 @@ jobs:
       fail-fast: false # We want every single job to run completely, we don't want one failing job on the matrix to stop the rest of them.
       matrix:
         spec_group: ${{ fromJson(needs.prepare-matrix.outputs.spec_groups) }}
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     defaults:
       run:
         working-directory: clients
