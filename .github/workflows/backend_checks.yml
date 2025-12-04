@@ -27,7 +27,7 @@ jobs:
   ## Prechecks ##
   ###############
   Collect-Tests:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -50,7 +50,7 @@ jobs:
       matrix:
         # NOTE: These are the currently supported/tested Python Versions
         python_version: ["3.9.21", "3.10.16"]
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -82,7 +82,7 @@ jobs:
   ##################
   Performance-Checks:
     needs: Check-Container-Startup
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     continue-on-error: true
     steps:
       - name: Download container
@@ -126,7 +126,7 @@ jobs:
   #################
   Check-Container-Startup:
     needs: Build
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 10
     steps:
       - name: Download container
@@ -173,7 +173,7 @@ jobs:
           - "minimal_config_startup"
           - "check_migrations"
 
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 15
     continue-on-error: true
     steps:
@@ -226,7 +226,7 @@ jobs:
           - "misc-unit"
           - "misc-integration"
 
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 45
     steps:
       - name: Download container
@@ -276,7 +276,7 @@ jobs:
       max-parallel: 1 # This prevents collisions in shared external resources
       matrix:
         python_version: ["3.9.21", "3.10.16"]
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 20
     # In PRs run with the "unsafe" label, or run on a "push" event to main
     if: contains(github.event.pull_request.labels.*.name, 'run unsafe ci checks') || github.event_name == 'push'
@@ -338,7 +338,7 @@ jobs:
       max-parallel: 1 # This prevents collisions in shared external resources
       matrix:
         python_version: ["3.9.21", "3.10.16"]
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 30
     # In PRs run with the "unsafe" label, or run on a "push" event to main
     if: contains(github.event.pull_request.labels.*.name, 'run unsafe ci checks') || github.event_name == 'push'
@@ -433,7 +433,7 @@ jobs:
 
   External-SaaS-Connectors:
     needs: Check-Container-Startup
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 30
     # In PRs run with the "unsafe" label, or run on a "push" event to main
     if: contains(github.event.pull_request.labels.*.name, 'run unsafe ci checks') || github.event_name == 'push'
