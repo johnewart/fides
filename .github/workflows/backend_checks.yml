@@ -200,11 +200,11 @@ jobs:
         with:
           enable-cache: true
 
-#      - name: Run unit tests
-#        run: just run-unit-tests
-
-      - name: Run integration tests
-        run: just run-integration-tests
+      - name: Run unit tests
+        run: just run-unit-tests
+#
+#      - name: Run integration tests
+#        run: just run-integration-tests
 
 #      - name: Upload coverage
 #        uses: codecov/codecov-action@v5
