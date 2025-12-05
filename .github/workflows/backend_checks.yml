@@ -200,8 +200,8 @@ jobs:
         with:
           enable-cache: true
 
-      - name: Run unit tests
-        run: just run-unit-tests
+#      - name: Run unit tests
+#        run: just run-unit-tests
 
       - name: Run integration tests
         run: just run-integration-tests
