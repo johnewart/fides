@@ -23,7 +23,7 @@ username = "root_user"
 password = "Testpassword1!"
 
 [redis]
-host = "redis"
+host = "127.0.0.1"
 password = "redispassword"
 port = 6379
 charset = "utf8"
