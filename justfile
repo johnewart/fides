@@ -1,3 +1,5 @@
+set dotenv-load
+
 run-static-analysis:
    uv run black --check ./src ./tests
    uv run isort --check-only ./src
@@ -5,16 +7,26 @@ run-static-analysis:
    uv run mypy ./src
    #uv run xenon ./src --max-absolute B --max-modules B --max-average A --ignore "data,docs" --exclude "src/fides/_version.py"
 
+echo:
+    echo $FIDES__REDIS__HOST
 
+start-test-docker-services:
+    #!/usr/bin/env bash
+    docker-compose -f .fides/test/docker-compose.yml up -d
+    while ! docker ps | grep postgres | grep "(healthy)"; do
+        echo "Waiting for postgresql to become healthy..."
+        sleep 5
+    done
+    echo "postgres is healthy!"
 
 run-not-external-tests:
    uv run pytest ./tests -m "not external"
 
 run-integration-tests:
-   uv run pytest ./tests -m "integration"
+   uv run pytest -n auto ./tests -m "integration"
 
-run-unit-tests:
-   uv run pytest ./tests -m "unit"
+run-unit-tests: start-test-docker-services
+   uv run pytest -n auto ./tests -m "unit"
 
 run-saas-tests:
    uv run pytest ./tests -m "saas"
