@@ -19,6 +19,9 @@ start-test-docker-services:
     done
     echo "postgres is healthy!"
 
+convert-junit-xml:
+    uvx junit2html ./test_report.xml ./test_report.html
+
 run-not-external-tests:
    uv run pytest ./tests -m "not external"
 

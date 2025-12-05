@@ -143,6 +143,7 @@ dev = [
     "watchfiles==0.19.0",
     "werkzeug==3.0.6",
     "xenon==0.9.0",
+    "junit2html"
 ]
 
 docs = [
@@ -156,7 +157,6 @@ docs = [
 
 [tool.uv]
 override-dependencies = ["debugpy>=1.8.12"]
-
 
 [project.scripts]
 fides = "fides.cli:cli"
@@ -332,9 +332,16 @@ extension-pkg-whitelist = ["pydantic", "zlib", "cassandra"]
 ## Pytest ##
 ############
 [tool.pytest.ini_options]
+junit_family = 'xunit2'
+junit_suite_name = 'Fides'
+junit_logging = 'all'
+junit_log_passing_tests = false
+junit_log_truncate = true
+
 env = [
-  "FIDES__TEST_MODE=true",
-  "FIDES__SECURITY__AUTH_RATE_LIMIT=1000/minute"
+    "FIDES__TEST_MODE=true",
+    "FIDES__SECURITY__AUTH_RATE_LIMIT=1000/minute",
+    "FIDES__CONFIG_PATH=.fides/test/fides.toml"
 ]
 log_cli=false
 filterwarnings = "ignore::DeprecationWarning:aiofiles.*:"
@@ -345,8 +352,10 @@ addopts = [
     "--cov-branch",
     "--no-cov-on-fail",
     "-ra",
-    "-vv",
-    "--disable-pytest-warnings"
+    "-q",
+    "--disable-pytest-warnings",
+    "--junitxml=test_report.xml",
+    "--log-file=test_log.log"
 ]
 markers = [
     "unit: only runs tests that don't require non-python dependencies (i.e. a database)",
