@@ -145,28 +145,10 @@ jobs:
 #        run: nox -s check_worker_startup
 
   Misc-Tests:
-    strategy:
-      matrix:
-        test_selection:
-          - "check_fides_annotations"
-          - "fides_db_scan"
-          - "docs_check"
-          - "minimal_config_startup"
-          - "check_migrations"
-
     runs-on: self-hosted
     timeout-minutes: 15
     continue-on-error: true
     steps:
-      - name: Download container
-        uses: actions/download-artifact@v4
-        with:
-          name: python-${{ env.DEFAULT_PYTHON_VERSION }}
-          path: /tmp/
-
-      - name: Load image
-        run: docker load --input /tmp/python-${{ env.DEFAULT_PYTHON_VERSION }}.tar
-
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -174,7 +156,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.DEFAULT_PYTHON_VERSION }}
-          cache: "pip"
 
       - name: Install just
         uses: extractions/setup-just@v3
@@ -189,6 +170,7 @@ jobs:
 
       - name: Check docs
         run: just check-docs
+
 
 
 
@@ -218,11 +200,17 @@ jobs:
         with:
           enable-cache: true
 
-      - name: Upload coverage
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          fail_ci_if_error: false
+      - name: Run unit tests
+        run: just run-unit-tests
+
+      - name: Run integration tests
+        run: just run-integration-tests
+
+#      - name: Upload coverage
+#        uses: codecov/codecov-action@v5
+#        with:
+#          token: ${{ secrets.CODECOV_TOKEN }}
+#          fail_ci_if_error: false
 #
 #  ##################
 #  ## Unsafe Tests ##
