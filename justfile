@@ -1,5 +1,5 @@
 run-static-analysis:
-   uv run black --check ./src ./test
+   uv run black --check ./src ./tests
    uv run isort --check-only ./src
    uv run pylint ./src --jobs 0
    uv run mypy ./src
