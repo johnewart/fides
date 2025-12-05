@@ -2,7 +2,7 @@
 [postgres_example]
 server="127.0.0.1"
 user="postgres"
-password="postgres"
+password="fides"
 db="postgres_example"
 port= 5432
 
