@@ -4,7 +4,7 @@ from typing import Dict, Generator, List
 from urllib.parse import quote_plus
 from uuid import uuid4
 
-import pymssql
+
 import pytest
 import sqlalchemy
 from fideslang.manifests import write_manifest
@@ -516,6 +516,8 @@ class TestDatabase:
                     for query in queries:
                         engine.execute(sqlalchemy.sql.text(query))
                 else:
+                    import pymssql
+
                     with pymssql.connect(
                         database_parameters["server"],
                         database_parameters["username"],
