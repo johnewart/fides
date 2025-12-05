@@ -1,6 +1,6 @@
 # This file contains credentials for ops the integration tests
 [postgres_example]
-server="postgres_example"
+server="127.0.0.1"
 user="postgres"
 password="postgres"
 db="postgres_example"
