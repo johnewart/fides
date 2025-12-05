@@ -8,31 +8,16 @@ on:
       - "release-**"
 
 env:
-  IMAGE: ethyca/fides:local
   DEFAULT_PYTHON_VERSION: "3.10.16"
-  # Docker auth with read-only permissions.
-  DOCKER_USER: ${{ secrets.DOCKER_USER }}
-  DOCKER_RO_TOKEN: ${{ secrets.DOCKER_RO_TOKEN }}
 
 jobs:
   ###################
   ## Static Checks ##
   ###################
   Static-Checks:
-    strategy:
-      matrix:
-        session_name:
-          [
-            '"isort(check)"',
-            '"black(check)"',
-            "mypy",
-            "pylint",
-            "xenon",
-            "check_install",
-            '"pytest(nox)"',
-          ]
     runs-on: self-hosted
     continue-on-error: true
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -43,11 +28,13 @@ jobs:
           python-version: ${{ env.DEFAULT_PYTHON_VERSION }}
           cache: "pip"
 
-      - name: Install Nox
-        run: pip install nox>=2022
+      - name: Install just
+        uses: extractions/setup-just@v3
 
-      - name: Install Dev Requirements
-        run: pip install -r dev-requirements.txt
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
 
-      - name: Run Static Check
-        run: nox -s ${{ matrix.session_name }}
+      - name: Run Static Checks
+        run: just run-static-analysis
