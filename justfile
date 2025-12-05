@@ -12,6 +12,7 @@ echo:
 
 start-test-docker-services:
     #!/usr/bin/env bash
+    docker-compose -f .fides/test/docker-compose.yml down
     docker-compose -f .fides/test/docker-compose.yml up -d
     while ! docker ps | grep postgres | grep "(healthy)"; do
         echo "Waiting for postgresql to become healthy..."
