@@ -183,9 +183,13 @@ jobs:
     runs-on: self-hosted
     container: python:3.10-slim
     services:
-      redis:
+      fides-redis:
         image: "redis:8.0-alpine"
-        command: redis-server --requirepass redispassword
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
       fides-db:
         image: postgres
         env:
