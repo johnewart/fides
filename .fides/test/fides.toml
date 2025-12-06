@@ -1,5 +1,5 @@
 [database]
-server = "localhost"
+server = "fides-db"
 user = "postgres"
 password = "fides"
 port = "5432"
@@ -24,6 +24,7 @@ password = "Testpassword1!"
 
 [redis]
 host = "localhost"
+password = ""
 port = 6379
 charset = "utf8"
 default_ttl_seconds = 604800
