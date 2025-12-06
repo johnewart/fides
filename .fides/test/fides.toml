@@ -1,5 +1,5 @@
 [database]
-server = "fides-db"
+server = "localhost"
 user = "postgres"
 password = "fides"
 port = "5432"
