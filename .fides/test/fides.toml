@@ -24,7 +24,7 @@ password = "Testpassword1!"
 
 [redis]
 host = "localhost"
-password = ""
+password = "redispassword"
 port = 6379
 charset = "utf8"
 default_ttl_seconds = 604800

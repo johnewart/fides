@@ -184,6 +184,8 @@ jobs:
     services:
       fides-redis:
         image: "redis:8.0-alpine"
+        env:
+          REDIS_PASSWORD: "redispassword"
         ports:
           - 6379:6379
         options: >-

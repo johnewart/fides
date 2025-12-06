@@ -30,7 +30,7 @@ run-integration-tests:
    uv run pytest -n auto ./tests -m "integration"
 
 run-unit-tests: 
-   uv run pytest -n auto ./tests -m "unit"
+   uv run pytest ./tests -m "unit"
 
 run-saas-tests:
    uv run pytest ./tests -m "saas"
