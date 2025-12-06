@@ -181,11 +181,27 @@ jobs:
     strategy:
       fail-fast: false
     runs-on: self-hosted
+    container: python:3.10-slim
+    services:
+      redis:
+        image: "redis:8.0-alpine"
+        command: redis-server --requirepass redispassword
+      fides-db:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: fides
+          POSTGRES_DB: "fides"
+          POSTGRES_USER: "postgres"
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     timeout-minutes: 45
     steps:
-
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set Up Python
         uses: actions/setup-python@v6

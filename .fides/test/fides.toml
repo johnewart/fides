@@ -1,5 +1,5 @@
 [database]
-server = "127.0.0.1"
+server = "fides-test"
 user = "postgres"
 password = "fides"
 port = "5432"
@@ -23,7 +23,7 @@ username = "root_user"
 password = "Testpassword1!"
 
 [redis]
-host = "127.0.0.1"
+host = "redis-test1"
 password = "redispassword"
 port = 6379
 charset = "utf8"
