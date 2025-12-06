@@ -29,7 +29,7 @@ run-not-external-tests:
 run-integration-tests:
    uv run pytest -n auto ./tests -m "integration"
 
-run-unit-tests: start-test-docker-services
+run-unit-tests: 
    uv run pytest -n auto ./tests -m "unit"
 
 run-saas-tests:
