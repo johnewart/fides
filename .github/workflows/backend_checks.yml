@@ -181,10 +181,11 @@ jobs:
     strategy:
       fail-fast: false
     runs-on: self-hosted
-    container: python:3.10-slim
     services:
       fides-redis:
         image: "redis:8.0-alpine"
+        ports:
+          - 6379:6379
         options: >-
           --health-cmd "redis-cli ping"
           --health-interval 10s
@@ -196,6 +197,8 @@ jobs:
           POSTGRES_PASSWORD: fides
           POSTGRES_DB: "fides"
           POSTGRES_USER: "postgres"
+        ports:
+          - 5432:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
